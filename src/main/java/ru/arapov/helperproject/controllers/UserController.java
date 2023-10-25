@@ -1,11 +1,13 @@
 package ru.arapov.helperproject.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.arapov.helperproject.models.User;
 import ru.arapov.helperproject.services.UserService;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -34,7 +36,7 @@ public class UserController {
         return service.getUserByUsername(username);
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable int id) {
         return service.deleteUser(id);
     }

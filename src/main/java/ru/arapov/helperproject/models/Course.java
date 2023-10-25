@@ -17,15 +17,21 @@ public class Course {
     private String courseName;
 
     @ManyToMany(fetch = FetchType.LAZY,
-    cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    }, mappedBy = "courses")
+             mappedBy = "courses", cascade = CascadeType.MERGE)
     @JsonIgnore
     private Set<User> users = new HashSet<>();
 
     public Course(String courseName) {
         this.courseName = courseName;
+    }
+
+    public Course(Integer id) {
+        Id = id;
+    }
+
+    public Course(String courseName, Set<User> users) {
+        this.courseName = courseName;
+        this.users = users;
     }
 
     public Course() {

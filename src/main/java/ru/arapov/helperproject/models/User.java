@@ -31,7 +31,6 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY,
     cascade = {
-            CascadeType.PERSIST,
             CascadeType.MERGE
     })
     @JoinTable(name = "user_course",

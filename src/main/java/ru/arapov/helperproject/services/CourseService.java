@@ -17,10 +17,6 @@ public class CourseService {
         return repository.save(course);
     }
 
-    public List<Course> addCourses(List<Course> courses) {
-        return repository.saveAll(courses);
-    }
-
     public List<Course> getCourses() {
         return repository.findAll();
     }

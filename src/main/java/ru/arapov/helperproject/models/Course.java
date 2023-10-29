@@ -17,21 +17,26 @@ public class Course {
     private String courseName;
 
     @ManyToMany(fetch = FetchType.LAZY,
-             mappedBy = "courses", cascade = CascadeType.MERGE)
+            mappedBy = "courses", cascade = CascadeType.MERGE)
     @JsonIgnore
     private Set<User> users = new HashSet<>();
 
-    public Course(String courseName) {
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "course_lecture",
+            joinColumns = {@JoinColumn(name = "course_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "lecture_id", referencedColumnName = "id")})
+    private Set<Lecture> lectures = new HashSet<>();
+
+    public Course(String courseName, Set<Lecture> lectures) {
         this.courseName = courseName;
+        this.lectures = lectures;
     }
 
     public Course(Integer id) {
         Id = id;
-    }
-
-    public Course(String courseName, Set<User> users) {
-        this.courseName = courseName;
-        this.users = users;
     }
 
     public Course() {
@@ -60,5 +65,18 @@ public class Course {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public Set<Lecture> getLectures() {
+        return lectures;
+    }
+
+    public void setLectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
+    }
+
+    public void addLecture(Lecture lecture) {
+        this.lectures.add(lecture);
+        lecture.getCourses().add(this);
     }
 }

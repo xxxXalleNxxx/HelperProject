@@ -2,13 +2,10 @@ package ru.arapov.helperproject.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.arapov.helperproject.models.Course;
 import ru.arapov.helperproject.models.User;
-import ru.arapov.helperproject.repositories.CourseRepository;
 import ru.arapov.helperproject.repositories.UserRepository;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -18,10 +15,6 @@ public class UserService {
 
     public User saveUser(User user) {
         return userRepository.save(user);
-    }
-
-    public List<User> saveUsers(List<User> users) {
-        return  userRepository.saveAll(users);
     }
 
     public List<User> getUsers() {
